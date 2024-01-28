@@ -1,0 +1,38 @@
+<div class="container">
+  <div>
+    <label>
+      Year
+      <select class="select select-primary" [formControl]="yearCtrl">
+        @for (y of years; track $index) {
+        <option [value]="y">{{y}}</option>
+        }
+      </select>
+    </label>
+  
+    <label>
+      Month
+      <select class="select select-primary" [formControl]="monthCtrl">
+        @for (m of months; track $index) {
+        <option [value]="$index + 1">{{m}}</option>
+        }
+      </select>
+    </label>
+  
+    <label>
+      Day
+      <select class="select select-primary" [formControl]="dayCtrl">
+        @for (d of days; track $index) {
+        <option [value]="d">{{d}}</option>
+        }
+      </select>
+    </label>
+  </div>
+  
+  <div class="calendar">
+    @for (day of days; track $index) {
+    <div class="day">{{day}}</div>
+    }
+  </div>
+  
+  <input class="input input-primary" type="month" [value]="date()">
+</div>
