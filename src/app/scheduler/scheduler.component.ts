@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
   templateUrl: './scheduler.component.html',
   styleUrl: './scheduler.component.scss',
 })
-export class SchedulerComponent implements OnInit {
+export class SchedulerComponent {
   @Input() year = dayjs().year();
   @Input() month = dayjs().month() + 1;
   @Input() day = dayjs().date();
@@ -42,19 +42,10 @@ export class SchedulerComponent implements OnInit {
     }),
   }
 
-  // we use to do this kind of thing to react to
-  ngOnInit() {
-    this.calendar.valueChanges.subscribe(() => {
-      this.updateDays();
-    })
-  }
-  daysInMonth = 0;
-  days: number[] = [];
-
-  updateDays() {
-    this.daysInMonth = dayjs(`${this.$.year()}-${this.$.month()}-01`).daysInMonth();
-    this.days = new Array(this.daysInMonth).fill(0).map((_, i) => i + 1);
-  }
+  daysInMonth = computed(() => {
+    return dayjs(`${this.$.year()}-${this.$.month()}-01`).daysInMonth();
+  });
+  days = computed(() => new Array(this.daysInMonth()).fill(0).map((_, i) => i + 1));
 
   @Output() change = new EventEmitter<string>();
 
