@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { ThemeComponent } from './components/theme/theme.component';
+import { CalendarComponent, ThemeComponent } from '@components';
 
 @Component({
   selector: 'app-root',

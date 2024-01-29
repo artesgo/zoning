@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CalendarComponent } from '../../components/calendar/calendar.component';
+import { CalendarComponent } from '@components';
 
 @Component({
   selector: 'app-scheduler',

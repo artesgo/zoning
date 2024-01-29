@@ -7,7 +7,6 @@ import { Injectable, effect, signal } from "@angular/core";
   theme = signal('light');
 
   applyTheme$ = effect(() => {
-    console.log('hello?', this.theme());
     document.documentElement.setAttribute('data-theme', this.theme())
   });
 }
