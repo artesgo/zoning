@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { SchedulerComponent } from './scheduler.component';
+import { CalendarComponent } from './calendar.component';
 
-describe('SchedulerComponent', () => {
-  let app: SchedulerComponent;
+describe('CalendarComponent', () => {
+  let app: CalendarComponent;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SchedulerComponent],
+      imports: [CalendarComponent],
     }).compileComponents();
-    const fixture = TestBed.createComponent(SchedulerComponent);
+    const fixture = TestBed.createComponent(CalendarComponent);
     app = fixture.componentInstance;
   });
 

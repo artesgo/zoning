@@ -1,0 +1,85 @@
+<div class="container">
+  <div>
+    <div class="flex gap-2">
+      <div class="flex flex-col flex-grow w-third items-center">
+        <label for="year"> Year </label>
+        <select
+          id="year"
+          class="select select-primary select-xs w-full"
+          [formControl]="yearCtrl"
+        >
+          @for (y of years; track $index) {
+          <option [value]="y">{{ y }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="flex flex-col flex-grow w-third items-center">
+        <label for="month"> Month </label
+        ><select
+          id="month"
+          class="select select-primary select-xs w-full"
+          [formControl]="monthCtrl"
+        >
+          @for (m of months; track $index) {
+          <option [value]="$index + 1">{{ m }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="flex flex-col flex-grow w-third items-center">
+        <label for="day"> Day </label
+        ><select id="day" class="select select-primary select-xs w-full" [formControl]="dayCtrl">
+          @for (d of days(); track $index) {
+          <option [value]="d">{{ d }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    @if (time) {
+    <div class="flex gap-2">
+      <div class="flex flex-col flex-grow w-third items-center">
+        <label for="hour">Hour</label>
+        <input
+          id="hour"
+          class="input input-primary input-xs"
+          type="text"
+          [formControl]="hourCtrl"
+        />
+      </div>
+      <div class="flex flex-col flex-grow w-third items-center">
+        <label for="minute">Minute</label>
+        <input
+          class="input input-primary input-xs"
+          type="text"
+          [formControl]="minuteCtrl"
+        />
+      </div>
+      <div class="flex flex-col flex-grow w-third items-center">
+        <label for="second">Second</label>
+        <input
+          class="input input-primary input-xs"
+          type="text"
+          [formControl]="secondCtrl"
+        />
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="calendar">
+    @for (d of days(); track $index) {
+    <button
+      class="day button border"
+      [class.border-primary]="d == $.day()"
+      [class.border-neutral]="d != $.day()"
+      (click)="dayCtrl.setValue(d)"
+    >
+      {{ d }}
+    </button>
+    }
+  </div>
+
+  <input class="input input-primary input-xs" type="month" [value]="date()" />
+</div>

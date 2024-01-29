@@ -1,11 +1,8 @@
-.container {
-  margin: 4rem;
-}
-
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 0.5rem;
+  padding: 1rem;
 }
 
 .day {
