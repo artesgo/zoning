@@ -1,0 +1,5 @@
+<select class="select select-primary select-xs" [value]="theme()" [formControl]="themeSelect">
+  @for (t of themes; track $index) {
+  <option [value]="t">{{ t }}</option>
+  }
+</select>
