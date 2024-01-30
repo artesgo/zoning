@@ -24,6 +24,8 @@ export class CalendarComponent {
   @Input() minute = dayjs().minute();
   @Input() second = dayjs().second();
   @Input() time = false;
+  @Input() startSunday = false;
+  @Input() debug = false;
   
   @Output() change = new EventEmitter<{ year: string; month: string; day: string; hour: string; minute: string; second: string, formatted: string }>();
 
@@ -67,7 +69,15 @@ export class CalendarComponent {
   daysInMonth = computed(() => {
     return dayjs(`${this.$.year()}-${this.$.month()}-01`).daysInMonth();
   });
-  days = computed(() => new Array(this.daysInMonth()).fill(0).map((_, i) => i + 1));
+  days = computed(() => {
+    // get the first day of the week of the month
+    const offset = this.startSunday ? 0 : 1;
+    let firstDay = dayjs(`${this.$.year()}-${this.$.month()}-01`).day() - offset;
+    if (firstDay < 0) firstDay += 7;
+    const _pad = new Array(firstDay).fill(-1)
+    const _days = new Array(this.daysInMonth()).fill(0).map((_, i) => i + 1);
+    return [..._pad, ..._days]
+  });
 
   date = computed(() => {
     if (this.time) {

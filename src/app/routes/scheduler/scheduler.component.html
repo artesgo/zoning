@@ -1,2 +1,6 @@
-<app-calendar></app-calendar>
+<div class="scheduler">
+  <app-calendar [time]="time"></app-calendar>
+
+  <input type="checkbox" id="show-workers" [(ngModel)]="time" />
+</div>
 <!-- show list of workers -->

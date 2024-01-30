@@ -1,7 +1,7 @@
 <div class="container">
   <div>
-    <div class="flex gap-2">
-      <div class="flex flex-col flex-grow w-third items-center">
+    <div class="grid controls gap-2">
+      <div class="flex flex-col flex-grow items-center">
         <label for="year"> Year </label>
         <select
           id="year"
@@ -14,7 +14,7 @@
         </select>
       </div>
 
-      <div class="flex flex-col flex-grow w-third items-center">
+      <div class="flex flex-col flex-grow items-center">
         <label for="month"> Month </label
         ><select
           id="month"
@@ -27,7 +27,7 @@
         </select>
       </div>
 
-      <div class="flex flex-col flex-grow w-third items-center">
+      <div class="flex flex-col flex-grow items-center">
         <label for="day"> Day </label
         ><select id="day" class="select select-primary select-xs w-full" [formControl]="dayCtrl">
           @for (d of days(); track $index) {
@@ -38,28 +38,30 @@
     </div>
 
     @if (time) {
-    <div class="flex gap-2">
-      <div class="flex flex-col flex-grow w-third items-center">
+    <div class="grid controls gap-2">
+      <div class="flex flex-col flex-grow items-center">
         <label for="hour">Hour</label>
         <input
           id="hour"
-          class="input input-primary input-xs"
+          class="input input-primary input-xs w-full"
           type="text"
           [formControl]="hourCtrl"
         />
       </div>
-      <div class="flex flex-col flex-grow w-third items-center">
+
+      <div class="flex flex-col flex-grow items-center">
         <label for="minute">Minute</label>
         <input
-          class="input input-primary input-xs"
+          class="input input-primary input-xs w-full"
           type="text"
           [formControl]="minuteCtrl"
         />
       </div>
-      <div class="flex flex-col flex-grow w-third items-center">
+
+      <div class="flex flex-col flex-grow items-center">
         <label for="second">Second</label>
         <input
-          class="input input-primary input-xs"
+          class="input input-primary input-xs w-full"
           type="text"
           [formControl]="secondCtrl"
         />
@@ -69,17 +71,33 @@
   </div>
 
   <div class="calendar">
+    @if (startSunday) {
+      @for (w of ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]; track $index) {
+        <div class="day">{{ w }}</div>
+      }
+    } @else {
+      @for (w of ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]; track $index) {
+        <div class="day">{{ w }}</div>
+      }
+    }
     @for (d of days(); track $index) {
-    <button
-      class="day button border"
-      [class.border-primary]="d == $.day()"
-      [class.border-neutral]="d != $.day()"
-      (click)="dayCtrl.setValue(d)"
-    >
-      {{ d }}
-    </button>
+      @if (d == -1) {
+        <div class="day"></div>
+      } @else {
+        <button
+          class="day button border"
+          [class.border-primary]="d == $.day()"
+          [class.border-4]="d == $.day()"
+          [class.border-neutral]="d != $.day()"
+          (click)="dayCtrl.setValue(d)">
+          {{ d }}
+        </button>
+      }
     }
   </div>
 
-  <input class="input input-primary input-xs" type="month" [value]="date()" />
+  @if (debug) {
+    <label for="output">Output</label>
+    <input id="output" class="input input-primary input-xs" type="month" [value]="date()" />
+  }
 </div>
