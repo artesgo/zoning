@@ -3,3 +3,24 @@
   min-width: 400px;
   margin: 0 auto;
 }
+
+.calendar {
+  width: 60%;
+  min-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 0.5rem;
+  padding: 1rem;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+select {
+  padding: 0 6px;
+}

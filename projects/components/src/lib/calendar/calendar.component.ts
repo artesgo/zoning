@@ -3,10 +3,16 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import dayjs from 'dayjs';
+import { pad } from '../helper';
 
-function pad(input: number | null) {
-  if (!input) return '00';
-  return input < 10 ? `0${input}` : input.toString();
+export type CalendarChange = {
+  year: string;
+  month: string;
+  day: string;
+  hour: string;
+  minute: string;
+  second: string;
+  formatted: string
 }
 
 @Component({
@@ -27,8 +33,9 @@ export class CalendarComponent {
   @Input() startSunday = false;
   @Input() debug = false;
   @Input() years = new Array(100).fill(0).map((_, i) => this.year - 99 + i);
+  @Input() range = false;
   
-  @Output() change = new EventEmitter<{ year: string; month: string; day: string; hour: string; minute: string; second: string, formatted: string }>();
+  @Output() change = new EventEmitter<CalendarChange>();
 
   yearCtrl = new FormControl(this.year);
   monthCtrl = new FormControl(this.month);
@@ -78,7 +85,6 @@ export class CalendarComponent {
     const _days = new Array(this.daysInMonth()).fill(0).map((_, i) => i + 1);
     return [..._pad, ..._days]
   });
-
   date = computed(() => {
     if (this.time) {
       return `${this.$.year()}-${pad(this.$.month())}-${pad(this.$.day())}T${pad(this.$.hour())}:${pad(this.$.minute())}:${pad(this.$.second())}`;

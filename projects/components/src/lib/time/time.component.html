@@ -1,0 +1,16 @@
+<div class="grid controls gap-2">
+  <div class="flex flex-col flex-grow items-center">
+    <label for="hour">Hour</label>
+    <input id="hour" class="input input-primary input-xs w-full" type="text" [formControl]="hourCtrl" />
+  </div>
+
+  <div class="flex flex-col flex-grow items-center">
+    <label for="minute">Minute</label>
+    <input class="input input-primary input-xs w-full" type="text" [formControl]="minuteCtrl" />
+  </div>
+
+  <div class="flex flex-col flex-grow items-center">
+    <label for="second">Second</label>
+    <input class="input input-primary input-xs w-full" type="text" [formControl]="secondCtrl" />
+  </div>
+</div>

@@ -1,6 +1,43 @@
 <div class="scheduler">
-  <app-calendar [time]="time"></app-calendar>
-
-  <input type="checkbox" id="show-workers" [(ngModel)]="time" />
+  <app-calendar [time]="time" (change)="onDate($event)"></app-calendar>
 </div>
 <!-- show list of workers -->
+
+<!-- show schedule for the week -->
+<div class="calendar">
+  @for (w of ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]; track $index) {
+    <div class="day border border-primary">
+      <span>{{ w }}</span>
+      <span>
+        {{ months[week[$index].month()].substring(0, 3) }}-{{
+          week[$index].date()
+        }}
+      </span>
+    </div>
+  }
+  @for (position of [1, 2, 3, 4]; track $index) { 
+    @for (d of [1, 2, 3, 4, 5, 6, 7]; track $index) {
+      <div class="day border border-primary">
+        <select class="w-full select select-xs font-bold">
+          @for (emp of employees; track $index) {
+            <option>{{ emp }}</option>
+          }
+        </select>
+        <select class="w-full select select-xs" [value]="'8:00 AM'">
+          <option>7:30 AM</option>
+          <option>8:00 AM</option>
+          <option>8:30 AM</option>
+        </select>
+        <select class="w-full select select-xs" [value]="'3:00 PM'">
+          <option>2:30 PM</option>
+          <option>3:00 PM</option>
+          <option>3:30 PM</option>
+          <option>4:00 PM</option>
+          <option>4:30 PM</option>
+          <option>5:00 PM</option>
+          <option>5:30 PM</option>
+        </select>
+      </div>
+    }
+  }
+</div>
