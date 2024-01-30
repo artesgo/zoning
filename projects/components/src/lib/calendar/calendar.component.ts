@@ -26,6 +26,7 @@ export class CalendarComponent {
   @Input() time = false;
   @Input() startSunday = false;
   @Input() debug = false;
+  @Input() years = new Array(100).fill(0).map((_, i) => this.year - 99 + i);
   
   @Output() change = new EventEmitter<{ year: string; month: string; day: string; hour: string; minute: string; second: string, formatted: string }>();
 
@@ -42,7 +43,6 @@ export class CalendarComponent {
     day: this.dayCtrl
   });
 
-  years = [2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
 	months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
   $ = {
