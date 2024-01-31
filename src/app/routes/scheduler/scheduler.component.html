@@ -6,7 +6,7 @@
 <!-- show schedule for the week -->
 <div class="calendar">
   @for (w of ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]; track $index) {
-    <div class="day border border-primary">
+    <div class="day border border-primary rounded-md">
       <span>{{ w }}</span>
       <span>
         {{ months[week[$index].month()].substring(0, 3) }}-{{
@@ -15,29 +15,30 @@
       </span>
     </div>
   }
-  @for (position of [1, 2, 3, 4]; track $index) { 
-    @for (d of [1, 2, 3, 4, 5, 6, 7]; track $index) {
-      <div class="day border border-primary">
-        <select class="w-full select select-xs font-bold">
-          @for (emp of employees; track $index) {
-            <option>{{ emp }}</option>
-          }
-        </select>
-        <select class="w-full select select-xs" [value]="'8:00 AM'">
-          <option>7:30 AM</option>
-          <option>8:00 AM</option>
-          <option>8:30 AM</option>
-        </select>
-        <select class="w-full select select-xs" [value]="'3:00 PM'">
-          <option>2:30 PM</option>
-          <option>3:00 PM</option>
-          <option>3:30 PM</option>
-          <option>4:00 PM</option>
-          <option>4:30 PM</option>
-          <option>5:00 PM</option>
-          <option>5:30 PM</option>
-        </select>
-      </div>
-    }
+  @for (ctrl of scheduler.controls; track $index) {
+    <div class="day border border-primary rounded-md">
+      <select class="w-full select select-xs font-bold" [formControl]="getName($index)">
+        @for (e of employees; track $index) {
+        <option>{{ e }}</option>
+        }
+      </select>
+      <select class="w-full select select-xs" [formControl]="getStart($index)">
+        <option>7:30 AM</option>
+        <option>8:00 AM</option>
+        <option>8:30 AM</option>
+      </select>
+      <select class="w-full select select-xs" [formControl]="getEnd($index)">
+        <option>2:30 PM</option>
+        <option>3:00 PM</option>
+        <option>3:30 PM</option>
+        <option>4:00 PM</option>
+        <option>4:30 PM</option>
+        <option>5:00 PM</option>
+        <option>5:30 PM</option>
+      </select>
+    </div>
   }
+</div>
+<div class="scheduler">
+  <app-employees></app-employees>
 </div>
