@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect } from '@angular/core';
+import { AfterViewInit, Component, effect, inject } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -14,6 +14,7 @@ import {
 } from '@components';
 import dayjs from 'dayjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { EmployeesService } from '@components';
 
 @Component({
   selector: 'app-scheduler',
@@ -45,7 +46,8 @@ export class SchedulerComponent implements AfterViewInit {
     'November',
     'December',
   ];
-  employees = JSON.parse(localStorage.getItem('employees') || '[]');
+  empService = inject(EmployeesService);
+  employees = this.empService.employees;
 
   week = new Array(7).fill(dayjs());
   scheduler = new FormArray(

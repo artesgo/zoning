@@ -87,7 +87,6 @@
         <button
           class="day button border"
           [class.border-primary]="d == $.day()"
-          [class.border-4]="d == $.day()"
           [class.border-neutral]="d != $.day()"
           (click)="dayCtrl.setValue(d)">
           {{ d }}

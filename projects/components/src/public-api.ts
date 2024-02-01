@@ -3,6 +3,7 @@
  */
 
 export * from './lib/services/theme.service';
+export * from './lib/services/employees.service';
 export * from './lib/calendar/calendar.component';
 export * from './lib/theme/theme.component';
 export * from './lib/employees/employees.component';
