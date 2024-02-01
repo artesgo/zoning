@@ -16,18 +16,22 @@
     </div>
   }
   @for (ctrl of scheduler.controls; track $index) {
-    <div class="day border border-primary rounded-md">
-      <select class="w-full select select-xs font-bold" [formControl]="getName($index)">
+    <div
+      class="day border border-primary rounded-md"
+      [class.bg-primary]="getStart($index).value == '7:30 AM'"
+      [class.bg-accent]="getEnd($index).value == '5:30 PM'"
+    >
+      <select class="w-full select select-xs font-bold bg-transparent" [formControl]="getName($index)">
         @for (e of employees(); track $index) {
         <option>{{ e }}</option>
         }
       </select>
-      <select class="w-full select select-xs" [formControl]="getStart($index)">
+      <select class="w-full select select-xs bg-transparent" [formControl]="getStart($index)">
         <option>7:30 AM</option>
         <option>8:00 AM</option>
         <option>8:30 AM</option>
       </select>
-      <select class="w-full select select-xs" [formControl]="getEnd($index)">
+      <select class="w-full select select-xs bg-transparent" [formControl]="getEnd($index)">
         <option>2:30 PM</option>
         <option>3:00 PM</option>
         <option>3:30 PM</option>
