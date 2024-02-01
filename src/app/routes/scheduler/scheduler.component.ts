@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 import {
   CalendarChange,
   CalendarComponent,
-  EmployeesComponent,
 } from '@components';
 import dayjs from 'dayjs';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -24,7 +23,6 @@ import { EmployeesService } from '@components';
     FormsModule,
     CommonModule,
     CalendarComponent,
-    EmployeesComponent,
   ],
   templateUrl: './scheduler.component.html',
   styleUrl: './scheduler.component.scss',

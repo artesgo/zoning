@@ -10,20 +10,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './theme.component.html',
   styleUrl: './theme.component.scss'
 })
-export class ThemeComponent implements AfterViewInit {
+export class ThemeComponent {
   themer = inject(ThemeService);
   theme = this.themer.theme;
   themes = this.themer.themes;
 
-  ngAfterViewInit() {
-    this.theme.set(localStorage.getItem('theme') || 'light');
-  }
-
   themeSelect = new FormControl(this.theme());
+
   subscription = this.themeSelect.valueChanges.pipe(
     takeUntilDestroyed(),
   ).subscribe((theme) => {
-    this.themer.theme.set(theme || 'light');
+    this.theme.set(theme || 'light');
     localStorage.setItem('theme', theme || 'light');
   });
 }

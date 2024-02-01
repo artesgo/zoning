@@ -4,9 +4,9 @@ import { Injectable, effect, signal } from "@angular/core";
   providedIn: 'root'
 }) export class ThemeService {
   themes = ["light", "dark", "cupcake", "forest", "coffee"];
-  theme = signal('light');
+  theme = signal(localStorage.getItem('theme') || 'light');
 
   applyTheme$ = effect(() => {
-    document.documentElement.setAttribute('data-theme', this.theme())
+    document.documentElement.setAttribute('data-theme', this.theme());
   });
 }

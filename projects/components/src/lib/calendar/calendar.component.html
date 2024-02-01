@@ -70,6 +70,8 @@
     }
   </div>
 
+  <button class="sr-only">skip calendar buttons</button>
+
   <div class="calendar">
     @if (startSunday) {
       @for (w of ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]; track $index) {
@@ -85,9 +87,8 @@
         <div class="day"></div>
       } @else {
         <button
-          class="day button border"
-          [class.border-primary]="d == $.day()"
-          [class.border-neutral]="d != $.day()"
+          class="day btn btn-primary btn-xs"
+          [class.bg-accent]="d == $.day()"
           (click)="dayCtrl.setValue(d)">
           {{ d }}
         </button>
