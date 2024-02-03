@@ -31,7 +31,9 @@
         <label for="day"> Day </label
         ><select id="day" class="select select-primary select-xs w-full" [formControl]="dayCtrl">
           @for (d of days(); track $index) {
-          <option [value]="d">{{ d }}</option>
+            @if (d > -1) {
+              <option [value]="d">{{ d }}</option>
+            }
           }
         </select>
       </div>
@@ -89,6 +91,7 @@
         <button
           class="day btn btn-primary btn-xs"
           [class.bg-accent]="d == $.day()"
+          [class.text-accent-content]="d == $.day()"
           (click)="dayCtrl.setValue(d)">
           {{ d }}
         </button>

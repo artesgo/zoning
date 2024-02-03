@@ -19,6 +19,7 @@
     <div
       class="day border border-primary rounded-md"
       [class.bg-primary]="getStart($index).value == '7:30 AM'"
+      [class.text-primary-content]="getStart($index).value == '7:30 AM'"
       [class.bg-accent]="getEnd($index).value == '5:30 PM'"
     >
       <select class="w-full select select-xs font-bold bg-transparent" [formControl]="getName($index)">
