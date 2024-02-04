@@ -1,0 +1,26 @@
+<div>
+  <label for="company">Company:</label>
+  <input id="company" type="text" class="input input-primary input-xs" [formControl]="company" />
+</div>
+
+<div>
+  <label for="start">Start:</label>
+  <input id="start" type="text" class="input input-primary input-xs" [formControl]="start" />
+</div>
+
+<div>
+  <label for="end">End:</label>
+  <input id="end" type="text" class="input input-primary input-xs" [formControl]="end" />
+</div>
+
+<style>
+  :host {
+    width: 100%;
+  }
+
+  div {
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>

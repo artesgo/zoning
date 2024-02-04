@@ -1,0 +1,41 @@
+<div class="flex flex-col gap-2 mx-auto w-1/2 min-w-96">
+  <h2>Name</h2>
+  <div>
+    <label for="first">First Name:</label>
+    <input id="first" type="text" class="input input-primary input-xs" [formControl]="first" />
+  </div>
+
+  <div>
+    <label for="last">Last Name:</label>
+    <input id="last" type="text" class="input input-primary input-xs" [formControl]="last" />
+  </div>
+  
+  <h2>Contact</h2>
+  <div>
+    <label for="phone">Phone:</label>
+    <input id="phone" type="text" class="input input-primary input-xs" [formControl]="phone" />
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" type="text" class="input input-primary input-xs" [formControl]="email" />
+  </div>
+
+  <h2>Employment History</h2>
+  @for(e of employments.controls; track $index) {
+    <div>
+      <app-employment [employment]="e"></app-employment>
+    </div>
+  }
+</div>
+
+<style>
+  .flex div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  h2 {
+    margin: 20px auto 0 auto;
+  }
+</style>
