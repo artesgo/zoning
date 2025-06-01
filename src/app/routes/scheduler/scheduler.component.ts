@@ -1,16 +1,7 @@
 import { AfterViewInit, Component, effect, inject } from '@angular/core';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import {
-  CalendarChange,
-  CalendarComponent,
-} from '@components';
+import { CalendarChange, CalendarComponent, HoursService } from '@components';
 import dayjs from 'dayjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { EmployeesService } from '@components';
@@ -18,12 +9,7 @@ import { EmployeesService } from '@components';
 @Component({
   selector: 'app-scheduler',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    CalendarComponent,
-  ],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, CalendarComponent],
   templateUrl: './scheduler.component.html',
   styleUrl: './scheduler.component.scss',
 })
@@ -46,6 +32,9 @@ export class SchedulerComponent implements AfterViewInit {
   ];
   empService = inject(EmployeesService);
   employees = this.empService.employees;
+  hoursService = inject(HoursService);
+  startHours = this.hoursService.start;
+  endHours = this.hoursService.end;
 
   week = new Array(7).fill(dayjs());
   scheduler = new FormArray(
@@ -55,15 +44,15 @@ export class SchedulerComponent implements AfterViewInit {
           name: new FormControl(''),
           start: new FormControl(''),
           end: new FormControl(''),
-        })
-    )
+        }),
+    ),
   );
   onDate(data: CalendarChange) {
     // get first day of the week from selected date
     this.week = new Array(7).fill(0).map((_, i) =>
       dayjs(data.formatted)
         .startOf('week')
-        .add(i + 1, 'day')
+        .add(i + 1, 'day'),
     );
   }
 
@@ -105,4 +94,12 @@ export class SchedulerComponent implements AfterViewInit {
     }
     this.loaded = true;
   });
+
+  clear(index: number) {
+    for (let i = 0; i < 4; i++) {
+      this.getName(i * 7 + index).setValue('');
+      this.getStart(i * 7 + index).setValue('');
+      this.getEnd(i * 7 + index).setValue('');
+    }
+  }
 }

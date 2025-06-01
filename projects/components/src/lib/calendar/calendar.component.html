@@ -1,28 +1,21 @@
 <div class="container">
+  <button class="sr-only">skip to scheduler</button>
   <div>
-    <div class="grid controls gap-2">
+    <div class="grid controls gap-2 calendar-controls">
       <div class="flex flex-col flex-grow items-center">
         <label for="year"> Year </label>
-        <select
-          id="year"
-          class="select select-primary select-xs w-full"
-          [formControl]="yearCtrl"
-        >
+        <select id="year" class="select select-primary select-xs w-full" [formControl]="yearCtrl">
           @for (y of years; track $index) {
-          <option [value]="y">{{ y }}</option>
+            <option [value]="y">{{ y }}</option>
           }
         </select>
       </div>
 
       <div class="flex flex-col flex-grow items-center">
         <label for="month"> Month </label
-        ><select
-          id="month"
-          class="select select-primary select-xs w-full"
-          [formControl]="monthCtrl"
-        >
+        ><select id="month" class="select select-primary select-xs w-full" [formControl]="monthCtrl">
           @for (m of months; track $index) {
-          <option [value]="$index + 1">{{ m }}</option>
+            <option [value]="$index + 1">{{ m }}</option>
           }
         </select>
       </div>
@@ -40,47 +33,32 @@
     </div>
 
     @if (time) {
-    <div class="grid controls gap-2">
-      <div class="flex flex-col flex-grow items-center">
-        <label for="hour">Hour</label>
-        <input
-          id="hour"
-          class="input input-primary input-xs w-full"
-          type="text"
-          [formControl]="hourCtrl"
-        />
-      </div>
+      <div class="grid controls gap-2 time-controls">
+        <div class="flex flex-col flex-grow items-center">
+          <label for="hour">Hour</label>
+          <input id="hour" class="input input-primary input-xs w-full" type="text" [formControl]="hourCtrl" />
+        </div>
 
-      <div class="flex flex-col flex-grow items-center">
-        <label for="minute">Minute</label>
-        <input
-          class="input input-primary input-xs w-full"
-          type="text"
-          [formControl]="minuteCtrl"
-        />
-      </div>
+        <div class="flex flex-col flex-grow items-center">
+          <label for="minute">Minute</label>
+          <input class="input input-primary input-xs w-full" type="text" [formControl]="minuteCtrl" />
+        </div>
 
-      <div class="flex flex-col flex-grow items-center">
-        <label for="second">Second</label>
-        <input
-          class="input input-primary input-xs w-full"
-          type="text"
-          [formControl]="secondCtrl"
-        />
+        <div class="flex flex-col flex-grow items-center">
+          <label for="second">Second</label>
+          <input class="input input-primary input-xs w-full" type="text" [formControl]="secondCtrl" />
+        </div>
       </div>
-    </div>
     }
   </div>
 
-  <button class="sr-only">skip calendar buttons</button>
-
   <div class="calendar">
     @if (startSunday) {
-      @for (w of ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]; track $index) {
+      @for (w of ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']; track $index) {
         <div class="day">{{ w }}</div>
       }
     } @else {
-      @for (w of ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]; track $index) {
+      @for (w of ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']; track $index) {
         <div class="day">{{ w }}</div>
       }
     }
@@ -92,7 +70,8 @@
           class="day btn btn-primary btn-xs"
           [class.bg-accent]="d == $.day()"
           [class.text-accent-content]="d == $.day()"
-          (click)="dayCtrl.setValue(d)">
+          (click)="dayCtrl.setValue(d)"
+        >
           {{ d }}
         </button>
       }

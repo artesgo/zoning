@@ -5,14 +5,11 @@
 
 <!-- show schedule for the week -->
 <div class="calendar">
-  @for (w of ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]; track $index) {
+  @for (w of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']; track $index) {
     <div class="day border border-primary rounded-md">
+      <button class="btn btn-xs btn-primary hover:btn-secondary" (click)="clear($index)">Clear</button>
       <span>{{ w }}</span>
-      <span>
-        {{ months[week[$index].month()].substring(0, 3) }}-{{
-          week[$index].date()
-        }}
-      </span>
+      <span> {{ months[week[$index].month()].substring(0, 3) }}-{{ week[$index].date() }} </span>
     </div>
   }
   @for (ctrl of scheduler.controls; track $index) {
@@ -20,26 +17,21 @@
       class="day border border-primary rounded-md"
       [class.bg-primary]="getStart($index).value == '7:30 AM'"
       [class.text-primary-content]="getStart($index).value == '7:30 AM'"
-      [class.bg-accent]="getEnd($index).value == '5:30 PM'"
     >
       <select class="w-full select select-xs font-bold bg-transparent" [formControl]="getName($index)">
         @for (e of employees(); track $index) {
-        <option>{{ e }}</option>
+          <option>{{ e }}</option>
         }
       </select>
       <select class="w-full select select-xs bg-transparent" [formControl]="getStart($index)">
-        <option>7:30 AM</option>
-        <option>8:00 AM</option>
-        <option>8:30 AM</option>
+        @for (start of startHours(); track start) {
+          <option>{{ start }}</option>
+        }
       </select>
       <select class="w-full select select-xs bg-transparent" [formControl]="getEnd($index)">
-        <option>2:30 PM</option>
-        <option>3:00 PM</option>
-        <option>3:30 PM</option>
-        <option>4:00 PM</option>
-        <option>4:30 PM</option>
-        <option>5:00 PM</option>
-        <option>5:30 PM</option>
+        @for (end of endHours(); track end) {
+          <option>{{ end }}</option>
+        }
       </select>
     </div>
   }
