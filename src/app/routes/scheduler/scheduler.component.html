@@ -23,21 +23,37 @@
       [class.bg-primary]="getStart($index).value === '7:30 AM'"
       [class.text-primary-content]="getStart($index).value === '7:30 AM'"
     >
-      <select class="w-full bg-transparent items-center h-8" [formControl]="getName($index)">
-        @for (e of employees(); track $index) {
-          <option>{{ e }}</option>
-        }
-      </select>
-      <select class="w-full bg-transparent items-center h-8" [formControl]="getStart($index)">
-        @for (start of startHours(); track start) {
-          <option>{{ start }}</option>
-        }
-      </select>
-      <select class="w-full bg-transparent items-center h-8" [formControl]="getEnd($index)">
-        @for (end of endHours(); track end) {
-          <option>{{ end }}</option>
-        }
-      </select>
+      @if (screenshotTimer()) {
+        <div class="text-xs">{{ getName($index).value }}</div>
+        <div class="text-xs">{{ getStart($index).value }}</div>
+        <div class="text-xs">{{ getEnd($index).value }}</div>
+      } @else {
+        <select data-html2canvas-ignore class="w-full select select-xs bg-transparent" [formControl]="getName($index)">
+          @for (e of employees(); track $index) {
+            <option>{{ e }}</option>
+          }
+        </select>
+
+        <select
+          data-html2canvas-ignore
+          class="w-full select select-xs bg-transparent h-6"
+          [formControl]="getStart($index)"
+        >
+          @for (start of startHours(); track start) {
+            <option>{{ start }}</option>
+          }
+        </select>
+
+        <select
+          data-html2canvas-ignore
+          class="w-full select select-xs bg-transparent h-6"
+          [formControl]="getEnd($index)"
+        >
+          @for (end of endHours(); track end) {
+            <option>{{ end }}</option>
+          }
+        </select>
+      }
     </div>
   }
 </div>

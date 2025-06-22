@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect, inject } from '@angular/core';
+import { AfterViewInit, Component, effect, inject, signal } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CalendarChange, CalendarComponent, HoursService } from '@components';
@@ -38,6 +38,7 @@ export class SchedulerComponent implements AfterViewInit {
   hoursService = inject(HoursService);
   startHours = this.hoursService.start;
   endHours = this.hoursService.end;
+  screenshotTimer = signal(false);
 
   week = new Array(7).fill(dayjs());
   scheduler = new FormArray(
@@ -60,6 +61,10 @@ export class SchedulerComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.patch();
+  }
+
+  patch() {
     const schedule = localStorage.getItem('scheduler');
     if (schedule) {
       this.scheduler.patchValue(JSON.parse(schedule));
@@ -106,14 +111,20 @@ export class SchedulerComponent implements AfterViewInit {
     }
   }
 
-  options: Partial<Options> = {};
   capture() {
-    html2canvas.default(document.querySelector('#calendar') as HTMLElement, this.options).then((canvas) => {
-      const image = canvas.toDataURL('image/png');
-      const link = document.createElement('a');
-      link.download = 'schedule.png';
-      link.href = image;
-      link.click();
-    });
+    this.screenshotTimer.set(true);
+    setTimeout(() => {
+      html2canvas.default(document.querySelector('#calendar') as HTMLElement).then((canvas) => {
+        const image = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = 'schedule.png';
+        link.href = image;
+        link.click();
+        this.screenshotTimer.set(false);
+        setTimeout(() => {
+          this.patch();
+        }, 0);
+      });
+    }, 500);
   }
 }
