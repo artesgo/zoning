@@ -5,11 +5,14 @@ import { CalendarChange, CalendarComponent, HoursService } from '@components';
 import dayjs from 'dayjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { EmployeesService } from '@components';
+import { SvgCamera } from './camera.component';
+import * as html2canvas from 'html2canvas-pro';
+import { Options } from 'html2canvas-pro';
 
 @Component({
   selector: 'app-scheduler',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, CommonModule, CalendarComponent],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, CalendarComponent, SvgCamera],
   templateUrl: './scheduler.component.html',
   styleUrl: './scheduler.component.scss',
 })
@@ -101,5 +104,16 @@ export class SchedulerComponent implements AfterViewInit {
       this.getStart(i * 7 + index).setValue('');
       this.getEnd(i * 7 + index).setValue('');
     }
+  }
+
+  options: Partial<Options> = {};
+  capture() {
+    html2canvas.default(document.querySelector('#calendar') as HTMLElement, this.options).then((canvas) => {
+      const image = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.download = 'schedule.png';
+      link.href = image;
+      link.click();
+    });
   }
 }

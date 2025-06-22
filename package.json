@@ -21,6 +21,9 @@
     "@angular/platform-browser-dynamic": "^17.1.0",
     "@angular/router": "^17.1.0",
     "dayjs": "^1.11.10",
+    "html-to-image": "^1.11.13",
+    "html2canvas": "^1.4.1",
+    "html2canvas-pro": "^1.5.11",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

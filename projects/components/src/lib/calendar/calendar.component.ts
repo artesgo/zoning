@@ -12,20 +12,20 @@ export type CalendarChange = {
   hour: string;
   minute: string;
   second: string;
-  formatted: string
-}
+  formatted: string;
+};
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule ],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss',
 })
 export class CalendarComponent {
   @Input() year = dayjs().year();
   @Input() month = dayjs().month() + 1;
-  @Input() day = dayjs().date();
+  @Input() day = dayjs().date() + 5;
   @Input() hour = dayjs().hour();
   @Input() minute = dayjs().minute();
   @Input() second = dayjs().second();
@@ -34,7 +34,7 @@ export class CalendarComponent {
   @Input() debug = false;
   @Input() years = new Array(100).fill(0).map((_, i) => this.year - 99 + i);
   @Input() range = false;
-  
+
   @Output() change = new EventEmitter<CalendarChange>();
 
   yearCtrl = new FormControl(this.year);
@@ -47,31 +47,31 @@ export class CalendarComponent {
   calendar = new FormGroup({
     year: this.yearCtrl,
     month: this.monthCtrl,
-    day: this.dayCtrl
+    day: this.dayCtrl,
   });
 
-	months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
   $ = {
     year: toSignal(this.yearCtrl.valueChanges, {
-      initialValue: this.yearCtrl.value
+      initialValue: this.yearCtrl.value,
     }),
     month: toSignal(this.monthCtrl.valueChanges, {
-      initialValue: this.monthCtrl.value
+      initialValue: this.monthCtrl.value,
     }),
     day: toSignal(this.dayCtrl.valueChanges, {
-      initialValue: this.dayCtrl.value
+      initialValue: this.dayCtrl.value,
     }),
     hour: toSignal(this.hourCtrl.valueChanges, {
-      initialValue: this.hourCtrl.value
+      initialValue: this.hourCtrl.value,
     }),
     minute: toSignal(this.minuteCtrl.valueChanges, {
-      initialValue: this.minuteCtrl.value
+      initialValue: this.minuteCtrl.value,
     }),
     second: toSignal(this.secondCtrl.valueChanges, {
-      initialValue: this.secondCtrl.value
+      initialValue: this.secondCtrl.value,
     }),
-  }
+  };
 
   daysInMonth = computed(() => {
     return dayjs(`${this.$.year()}-${this.$.month()}-01`).daysInMonth();
@@ -81,9 +81,9 @@ export class CalendarComponent {
     const offset = this.startSunday ? 0 : 1;
     let firstDay = dayjs(`${this.$.year()}-${this.$.month()}-01`).day() - offset;
     if (firstDay < 0) firstDay += 7;
-    const _pad = new Array(firstDay).fill(-1)
+    const _pad = new Array(firstDay).fill(-1);
     const _days = new Array(this.daysInMonth()).fill(0).map((_, i) => i + 1);
-    return [..._pad, ..._days]
+    return [..._pad, ..._days];
   });
   date = computed(() => {
     if (this.time) {
