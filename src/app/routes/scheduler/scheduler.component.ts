@@ -16,7 +16,6 @@ import * as html2canvas from 'html2canvas-pro';
   styleUrl: './scheduler.component.scss',
 })
 export class SchedulerComponent implements AfterViewInit {
-  Object = Object;
   time = false;
   month = 0;
   months = [
