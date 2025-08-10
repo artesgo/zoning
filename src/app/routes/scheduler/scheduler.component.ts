@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, computed, effect, inject, signal } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CalendarChange, CalendarComponent, HoursService } from '@components';
@@ -7,7 +7,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { EmployeesService } from '@components';
 import { SvgCamera } from './camera.component';
 import * as html2canvas from 'html2canvas-pro';
-import { Options } from 'html2canvas-pro';
 
 @Component({
   selector: 'app-scheduler',
@@ -17,6 +16,7 @@ import { Options } from 'html2canvas-pro';
   styleUrl: './scheduler.component.scss',
 })
 export class SchedulerComponent implements AfterViewInit {
+  Object = Object;
   time = false;
   month = 0;
   months = [
@@ -101,6 +101,22 @@ export class SchedulerComponent implements AfterViewInit {
       this.save();
     }
     this.loaded = true;
+  });
+
+  tally = computed(() => {
+    const change = this.change();
+    let acc: { name: string; days: number }[] = [];
+    change.forEach((slot) => {
+      if (slot.name) {
+        const index = acc.findIndex((a) => a.name === slot.name);
+        if (index > -1) {
+          acc[index].days++;
+        } else {
+          acc.push({ name: slot.name, days: 1 });
+        }
+      }
+    });
+    return acc;
   });
 
   clear(index: number) {

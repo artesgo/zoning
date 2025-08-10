@@ -1,5 +1,13 @@
 <div class="scheduler">
   <app-calendar [time]="time" (change)="onDate($event)"></app-calendar>
+  <div>
+    @for (person of tally(); track $index) {
+      <div class="person">
+        <span class="name">{{ person.name }}:&nbsp;</span>
+        <span class="count">{{ person.days }}天</span>
+      </div>
+    }
+  </div>
 </div>
 <!-- show list of workers -->
 
