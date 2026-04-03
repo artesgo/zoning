@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, effect, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarChange, CalendarComponent, EmployeesService, HoursService } from '@components';
@@ -99,6 +99,22 @@ export class SchedulerComponent implements AfterViewInit {
       this.save();
     }
     this.loaded = true;
+  });
+
+  tally = computed(() => {
+    const change = this.change();
+    let acc: { name: string; days: number }[] = [];
+    change.forEach((slot) => {
+      if (slot.name) {
+        const index = acc.findIndex((a) => a.name === slot.name);
+        if (index > -1) {
+          acc[index].days++;
+        } else {
+          acc.push({ name: slot.name, days: 1 });
+        }
+      }
+    });
+    return acc;
   });
 
   clear(index: number) {

@@ -1,6 +1,13 @@
 .scheduler {
-  width: 360px;
+  width: 600px;
   margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+}
+
+.person {
+  display: flex;
+  margin: 0.5rem 1rem;
 }
 
 .calendar {
