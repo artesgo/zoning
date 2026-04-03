@@ -33,6 +33,7 @@ export class SchedulerComponent implements AfterViewInit {
   ];
   empService = inject(EmployeesService);
   employees = this.empService.employees;
+  positions = this.empService.positions;
   hoursService = inject(HoursService);
   startHours = this.hoursService.start;
   endHours = this.hoursService.end;
@@ -40,7 +41,7 @@ export class SchedulerComponent implements AfterViewInit {
 
   week = new Array(7).fill(dayjs());
   scheduler = new FormArray(
-    new Array(42).fill(0).map(
+    new Array(this.positions() * 7).fill(0).map(
       () =>
         new FormGroup({
           name: new FormControl(''),

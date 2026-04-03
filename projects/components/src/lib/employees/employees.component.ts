@@ -13,7 +13,9 @@ import { EmployeesService } from './employees.service';
 export class EmployeesComponent {
   empService = inject(EmployeesService);
   employee = new FormControl('');
+  position = new FormControl(6);
   employees = this.empService.employees;
+  positions = this.empService.positions;
 
   enter() {
     if (this.employee.value) {
@@ -23,5 +25,11 @@ export class EmployeesComponent {
 
   remove(name: string) {
     this.employees.set(this.employees().filter((e) => e !== name));
+  }
+
+  enterPosition() {
+    if (this.position.value) {
+      this.empService.positions.set(this.position.value);
+    }
   }
 }

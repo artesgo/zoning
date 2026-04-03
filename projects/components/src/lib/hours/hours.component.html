@@ -1,33 +1,30 @@
-<div>
-  <h2>Starting Times</h2>
+<div class="w-1/2 m-auto">
+  <div class="mt-8">
+    <h2>Starting Times</h2>
 
-  <input
-    type="text"
-    class="input input-primary input-xs w-full mt-8"
-    [formControl]="start"
-    (keydown.enter)="enterStart()"
-  />
+    <input
+      type="text"
+      class="input input-primary input-xs w-full"
+      [formControl]="start"
+      (keydown.enter)="enterStart()"
+    />
 
-  @for (e of startHours(); track $index) {
-    <button class="btn btn-xs btn-primary mx-1 px-4" (click)="removeStart(e)">
-      {{ e }}
-    </button>
-  }
-</div>
+    @for (e of startHours(); track $index) {
+      <button class="btn btn-xs btn-primary mx-1 px-4" (click)="removeStart(e)">
+        {{ e }}
+      </button>
+    }
+  </div>
 
-<div>
-  <h2>Stopping Times</h2>
+  <div class="mt-8">
+    <h2>Stopping Times</h2>
 
-  <input
-    type="text"
-    class="input input-primary input-xs w-full mt-8"
-    [formControl]="end"
-    (keydown.enter)="enterEnd()"
-  />
+    <input type="text" class="input input-primary input-xs w-full" [formControl]="end" (keydown.enter)="enterEnd()" />
 
-  @for (e of endHours(); track $index) {
-    <button class="btn btn-xs btn-primary mx-1 px-4" (click)="removeEnd(e)">
-      {{ e }}
-    </button>
-  }
+    @for (e of endHours(); track $index) {
+      <button class="btn btn-xs btn-primary mx-1 px-4" (click)="removeEnd(e)">
+        {{ e }}
+      </button>
+    }
+  </div>
 </div>

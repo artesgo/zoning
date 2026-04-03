@@ -1,12 +1,22 @@
-<input
-  type="text"
-  class="input input-primary input-xs w-full mt-8"
-  [formControl]="employee"
-  (keydown.enter)="enter()"
-/>
+<div class="w-1/2 m-auto">
+  <div class="mt-8">
+    <label for="employee">Employees 员工</label>
+    <input type="text" class="input input-primary input-xs w-full" [formControl]="employee" (keydown.enter)="enter()" />
+  </div>
 
-@for (e of employees(); track $index) {
-  <button class="btn btn-xs btn-primary mx-1 px-4" (click)="remove(e)">
-    {{ e }}
-  </button>
-}
+  @for (e of employees(); track $index) {
+    <button class="btn btn-xs btn-primary mx-1 px-4" (click)="remove(e)">
+      {{ e }}
+    </button>
+  }
+
+  <div class="mt-8">
+    <label for="position">Positions 位置</label>
+    <input
+      type="text"
+      class="input input-primary input-xs w-full"
+      [formControl]="position"
+      (keydown.enter)="enterPosition()"
+    />
+  </div>
+</div>
