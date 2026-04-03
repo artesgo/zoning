@@ -1,13 +1,11 @@
-import { AfterViewInit, Component, effect, inject, signal } from '@angular/core';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CalendarChange, CalendarComponent, HoursService } from '@components';
-import dayjs from 'dayjs';
+import { AfterViewInit, Component, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { EmployeesService } from '@components';
-import { SvgCamera } from './camera.component';
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CalendarChange, CalendarComponent, EmployeesService, HoursService } from '@components';
+import dayjs from 'dayjs';
 import * as html2canvas from 'html2canvas-pro';
-import { Options } from 'html2canvas-pro';
+import { SvgCamera } from './camera.component';
 
 @Component({
   selector: 'app-scheduler',
@@ -42,7 +40,7 @@ export class SchedulerComponent implements AfterViewInit {
 
   week = new Array(7).fill(dayjs());
   scheduler = new FormArray(
-    new Array(28).fill(0).map(
+    new Array(42).fill(0).map(
       () =>
         new FormGroup({
           name: new FormControl(''),
