@@ -55,7 +55,7 @@ export class SchedulerComponent implements AfterViewInit {
     this.week = new Array(7).fill(0).map((_, i) =>
       dayjs(data.formatted)
         .startOf('week')
-        .add(i + 1, 'day'),
+        .add(i, 'day'),
     );
   }
 

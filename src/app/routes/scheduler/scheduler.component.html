@@ -1,5 +1,5 @@
 <div class="scheduler">
-  <app-calendar [time]="time" (change)="onDate($event)"></app-calendar>
+  <app-calendar [time]="time" (change)="onDate($event)" [startSunday]="true"></app-calendar>
   <div>
     @for (person of tally(); track $index) {
       <div class="person">
@@ -19,7 +19,7 @@
 
 <!-- show schedule for the week -->
 <div class="calendar rounded-md" id="calendar">
-  @for (w of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']; track $index) {
+  @for (w of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; track $index) {
     <div class="day border border-primary rounded-md">
       <span>{{ w }}</span>
       <span> {{ months[week[$index].month()].substring(0, 3) }}-{{ week[$index].date() }} </span>
@@ -67,7 +67,7 @@
 </div>
 
 <div class="calendar bulk">
-  @for (w of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']; track $index) {
+  @for (w of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; track $index) {
     <button class="btn btn-xs btn-primary hover:btn-secondary" (click)="clear($index)">擦除</button>
   }
 </div>
